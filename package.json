@@ -1,6 +1,6 @@
 {
   "name": "vmactions-Debian",
-  "version": "",
+  "version": "1.0.0",
   "description": "GitHub actions for Debian",
   "type": "module",
   "main": "index.js",
