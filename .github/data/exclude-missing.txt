@@ -1,37 +1,35 @@
-          - release: "22.04"
+          - release: "12"
+            arch: riscv64
+          - release: "12"
             arch: powerpc64
-          - release: "22.04"
+          - release: "12"
             arch: sparc64
-          - release: "22.04"
+          - release: "12"
+            arch: s390x
+          - release: "12"
             arch: i386
-          - release: "22.04"
+          - release: "12"
             arch: loongarch64
-          - release: "22.04"
+          - release: "12"
             arch: armv7
-          - release: "24.04"
+          - release: "13"
             arch: powerpc64
-          - release: "24.04"
+          - release: "13"
             arch: sparc64
-          - release: "24.04"
+          - release: "13"
+            arch: s390x
+          - release: "13"
             arch: i386
-          - release: "24.04"
+          - release: "13"
             arch: loongarch64
-          - release: "24.04"
-            arch: armv7
-          - release: "26.04"
-            arch: powerpc64
-          - release: "26.04"
-            arch: sparc64
-          - release: "26.04"
-            arch: i386
-          - release: "26.04"
-            arch: loongarch64
-          - release: "26.04"
+          - release: "13"
             arch: armv7
           - release: ""
             arch: powerpc64
           - release: ""
             arch: sparc64
+          - release: ""
+            arch: s390x
           - release: ""
             arch: i386
           - release: ""
