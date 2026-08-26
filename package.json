@@ -1,0 +1,27 @@
+{
+  "name": "vmactions-Ubuntu",
+  "version": "1.0.0",
+  "description": "GitHub actions for Ubuntu",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmactions/ubuntu-vm.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "Ubuntu"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vmactions/ubuntu-vm/issues"
+  },
+  "homepage": "https://github.com/vmactions/ubuntu-vm",
+  "dependencies": {
+    "@actions/core": "^3.0.0",
+    "@actions/exec": "^3.0.0",
+    "@actions/cache": "^6.0.0"
+  }
+}
