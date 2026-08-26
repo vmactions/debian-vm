@@ -1,6 +1,6 @@
-# Run GitHub CI in Ubuntu 
+# Run GitHub CI in Debian 
 
-![Test](https://github.com/vmactions/ubuntu-vm/workflows/Test/badge.svg)
+![Test](https://github.com/vmactions/debian-vm/workflows/Test/badge.svg)
 
 
 
@@ -15,7 +15,7 @@ Powered by [AnyVM.org](https://anyvm.org)
 >
 > These VMs are now AI-ready. With the **[vmactions-ci skill](https://github.com/vmactions/vmactions-skill)**, an AI coding agent -- Claude Code, Codex, Copilot CLI, Gemini CLI, and others -- understands the full vmactions interface and writes the GitHub Actions CI for you, **automatically**.
 >
-> Just describe what you want in plain language, e.g. *"run my tests on Ubuntu"* or *"check that my project builds on Ubuntu aarch64"*, and the agent generates a correct, ready-to-commit `test.yml`. It will:
+> Just describe what you want in plain language, e.g. *"run my tests on Debian"* or *"check that my project builds on Debian aarch64"*, and the agent generates a correct, ready-to-commit `test.yml`. It will:
 >
 > - pick the right action, `release`, and `arch` for your target;
 > - install your toolchain and dependencies in the `prepare` step;
@@ -27,24 +27,36 @@ Powered by [AnyVM.org](https://anyvm.org)
 >
 > ### >> [Get the vmactions-ci skill](https://github.com/vmactions/vmactions-skill) <<
 
-Use this action to run your CI in Ubuntu.
+Use this action to run your CI in Debian.
 
-The github workflow only supports Ubuntu, Windows and MacOS. But what if you need to use Ubuntu?
+The github workflow only supports Ubuntu, Windows and MacOS. But what if you need to use Debian?
 
 
 All the supported releases are here:
 
 
 
-| Release | x86_64 (amd64) | aarch64 (arm64) | riscv64 | s390x | ppc64le (ppc64el) |
-|---------|---------|---------|---------|---------|---------|
-| 26.04 | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) |
-| 24.04 | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) |
-| 22.04 | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) |
+| Release | x86_64 (amd64) | aarch64 (arm64) | riscv64 | ppc64le (ppc64el) |
+|---------|---------|---------|---------|---------|
+| 13 | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) |
+| 12 | ✅ (rsync,scp,sshfs,nfs,tar) | ✅ (rsync,scp,sshfs,nfs,tar) | — | ✅ (rsync,scp,sshfs,nfs,tar) |
 
 <!-- arch-label: x86_64 = x86_64 (amd64) -->
 <!-- arch-label: aarch64 = aarch64 (arm64) -->
 <!-- arch-label: ppc64le = ppc64le (ppc64el) -->
+
+How the images are built:
+
+Each image is built automatically in the
+[anyvm-org/debian-builder](https://github.com/anyvm-org/debian-builder)
+repo's GitHub Actions: it downloads the official Debian generic cloud
+image, customizes it (serial console, ssh host keys, network config,
+first-boot setup), boots it in QEMU, pre-installs the packages listed
+in the conf, and exports the disk as a compressed qcow2 image. No
+interactive installer is run.
+
+Upstream media: the official Debian cloud images from
+https://cloud.debian.org/images/cloud/.
 
 
 
@@ -61,15 +73,15 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: A job to run test in Ubuntu
+    name: A job to run test in Debian
     env:
       MYTOKEN : ${{ secrets.MYTOKEN }}
       MYTOKEN2: "value2"
     steps:
     - uses: actions/checkout@v7
-    - name: Test in Ubuntu
+    - name: Test in Debian
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -81,7 +93,6 @@ jobs:
           whoami
           env
           uname -a
-          cat /etc/os-release
           nproc
           echo "OK"
 
@@ -92,7 +103,7 @@ jobs:
 ```
 
 
-The latest major version is: `v1`, which is the most recommended to use. (You can also use the latest full version: `v1.0.0`)  
+The latest major version is: `v0`, which is the most recommended to use. (You can also use the latest full version: `v0.0.0`)  
 
 
 If you are migrating from the previous `v0`, please change the `runs-on: ` to `runs-on: ubuntu-latest`
@@ -129,7 +140,7 @@ The code is shared from the host to the VM via `rsync` by default, you can choos
 
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         sync: sshfs  # or: nfs
 
@@ -151,7 +162,7 @@ When using `rsync` or `scp`,  you can define `copyback: false` to not copy files
 
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         sync: rsync
         copyback: false
@@ -174,7 +185,7 @@ You can add NAT port between the host and the VM.
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         nat: |
           "8080": "80"
@@ -193,7 +204,7 @@ The default memory of the VM is 6144MB, you can use `mem` option to set the memo
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         mem: 4096
 ...
@@ -207,7 +218,7 @@ The VM is using all the cpu cores of the host by default, you can use `cpu` opti
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         cpu: 3
 ...
@@ -216,31 +227,18 @@ The VM is using all the cpu cores of the host by default, you can use `cpu` opti
 
 ## 5. Select release
 
-It uses [the Ubuntu 24.04](conf/default.release.conf) by default, you can use `release` option to use another version of Ubuntu:
+It uses [the Debian 13](conf/default.release.conf) by default, you can use `release` option to use another version of Debian:
 
 ```yaml
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
-        release: "26.04"
+        release: "12"
 ...
 ```
 
-You can also give only the leading, `.` separated part of a release. The newest release that starts with it is used, so the workflow does not have to be edited for every point release:
-
-```yaml
-...
-    - name: Test
-      id: test
-      uses: vmactions/ubuntu-vm@v1
-      with:
-        release: "24"
-...
-```
-
-Here `release: "24"` runs the newest `24.x` release of Ubuntu. Every leading part works the same way, this action ships 22, 24, 26. Each part you give has to match in full, so a release that does not exist fails the job instead of quietly falling back to another one.
 
 ## 6. Select architecture
 
@@ -250,7 +248,7 @@ The vm is using x86_64(AMD64) by default, but you can use `arch` option to chang
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         arch: aarch64
 ...
@@ -260,11 +258,6 @@ When you run with `aarch64`, the host runner should still be the normal `x86_64`
 
 It's not recommended to use `ubuntu-24.04-arm` as runner, it's much more slower.
 
-
-
-All three releases ship every architecture (see the release table above).
-
-`aarch64`, `riscv64`, `s390x` and `ppc64le` all run under QEMU emulation on the x86_64 runner, so they are much slower than `x86_64`.
 
 
 ## 7. Custom shell
@@ -277,16 +270,16 @@ Support custom shell:
     - uses: actions/checkout@v7
     - name: Start VM
       id: vm
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         sync: nfs
     - name: Custom shell step 1
-      shell: ubuntu {0}
+      shell: debian {0}
       run: |
         pwd
         echo "this is step 1, running inside the VM"
     - name: Custom shell step 2
-      shell: ubuntu {0}
+      shell: debian {0}
       run: |
         pwd
         echo "this is step 2, running inside the VM"
@@ -308,7 +301,7 @@ You can also use `custom-shell-name` to set a custom name for the shell wrapper:
     - uses: actions/checkout@v7
     - name: Start VM
       id: vm
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         sync: nfs
         custom-shell-name: vmsh
@@ -334,7 +327,7 @@ If the time in VM is not correct, You can use `sync-time` option to synchronize 
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         sync-time: true
 ...
@@ -349,7 +342,7 @@ By default, the action caches `apt` packages on the host and VM images/artifacts
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         disable-cache: true
 ...
@@ -364,7 +357,7 @@ The `prepare` step (installing packages etc.) normally runs on every build. With
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         cache-after-prepare: true
         prepare: |
@@ -397,7 +390,7 @@ Then use it in the workflow:
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         debug-on-error: ${{ vars.DEBUG_ON_ERROR }}
 
@@ -410,7 +403,7 @@ You can also set the `vnc-password` parameter to set a custom password to protec
 ...
     - name: Test
       id: test
-      uses: vmactions/ubuntu-vm@v1
+      uses: vmactions/debian-vm@v0
       with:
         debug-on-error: ${{ vars.DEBUG_ON_ERROR }}
         vnc-password: ${{ secrets.VNC_PASSWORD }}
@@ -427,7 +420,7 @@ See more: [debug on error](https://github.com/vmactions/.github/wiki/debug%E2%80
 
 # Under the hood
 
-We use Qemu to run the Ubuntu VM.
+We use Qemu to run the Debian VM.
 
 
 
