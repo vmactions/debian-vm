@@ -124,7 +124,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'sshfs') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -289,7 +289,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'nfs') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -462,7 +462,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'scp') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         envs: 'DEBUG MYTOKEN MYTOKEN2'
         prepare: |
@@ -594,7 +594,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}', 'tar') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         mem: 4096
         debug: true
@@ -661,7 +661,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}', '9p') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         mem: 4096
         debug: true
@@ -784,7 +784,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'rsync') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -944,7 +944,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')[matrix.arch == '' && 'x86_64' || matrix.arch], 'rsync') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
@@ -1067,7 +1067,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')['x86_64'], 'rsync') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         mem: 4096
         debug: true
@@ -1129,7 +1129,7 @@ jobs:
     - name: Test in Debian
       if: ${{ contains(fromJSON('{"x86_64":["rsync","scp","sshfs","nfs","tar"],"aarch64":["rsync","scp","sshfs","nfs","tar"],"riscv64":["rsync","scp","sshfs","nfs","tar"],"powerpc64":[],"sparc64":[],"ppc64le":["rsync","scp","sshfs","nfs","tar"],"s390x":[],"i386":[],"loongarch64":[],"armv7":[]}')['x86_64'], 'rsync') }}
       id: test
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         mem: 4096
         debug: true
@@ -1207,7 +1207,7 @@ jobs:
     - name: Test in Debian
       id: testerr
       continue-on-error: true
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         debug: true
         # A command that EXISTS and fails, rather than `false` or a made-up
@@ -1253,7 +1253,7 @@ jobs:
     - name: Test in Debian
       id: testpass
       continue-on-error: true
-      uses: vmactions/debian-vm@0d6b013936c0b82a23afe732b42c34ece35a566b
+      uses: vmactions/debian-vm@e53d8c3bcdf5aae095cd53b298819805d8eda1d8
       with:
         debug: true
         # No `true` and no double quotes: this body runs on every guest, and
